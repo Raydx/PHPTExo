@@ -66,7 +66,7 @@ class PersonneDBTest extends Testcase
             $this->personne = new PersonneDB($this->pdodb);
             $dt = new DateTime('1950-01-12');
             $p = new Personne(
-                6,
+                1,
                 "Marie",
                 "Jeanne",
                 $dt,
@@ -103,7 +103,7 @@ class PersonneDBTest extends Testcase
             $this->personne = new PersonneDB($this->pdodb);
             $dt = new DateTime('1950-01-12');
             $p = new Personne(
-                10,
+                11,
                 "Hollande",
                 "Francois",
                 $dt,

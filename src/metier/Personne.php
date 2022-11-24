@@ -2,6 +2,7 @@
 
 class Personne
 {
+    private $Adresse;
     private int $id;
     private ?string $nom;
     private ?string $prenom;

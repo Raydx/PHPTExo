@@ -1,6 +1,6 @@
 <?php
-require_once "src/Constantes.php";
-require_once "src/metier/Personne.php";
+require_once "Constantes.php";
+require_once "metier/Personne.php";
 /**
  *
  *Classe permettant d'acceder en bdd pour inserer supprimer
@@ -102,6 +102,25 @@ class PersonneDB
         $res = $this->convertPdoPers($arrAll);
         return $res;
     }
+    public function selectionLogin($login)
+    {
+        $query = 'SELECT id,nom,prenom,datenaissance,telephone,email,login,pwd FROM personne WHERE login=:l';
+        $q = $this->db->prepare($query);
+
+        $q->bindValue(':l', $login);
+        $q->execute();
+
+        $arrAll = $q->fetch(PDO::FETCH_ASSOC);
+
+        if (empty($arrAll)) {
+            throw new Exception(Constantes::EXCEPTION_DB_PERSONNE);
+        }
+        $q->closeCursor();
+        $q = NULL;
+
+        $res = $this->convertPdoPers($arrAll);
+        return $res;
+    }
 
     public function convertPdoPers($pdoPers)
     {
@@ -113,5 +132,23 @@ class PersonneDB
         $dt = new DateTime($obj->datenaissance);
         $pers = new Personne($obj->id, $obj->nom, $obj->prenom, $dt, $obj->telephone, $obj->email, $obj->login, $obj->pwd);
         return $pers;
+    }
+
+    public function authentification($login, $pwd)
+    {
+        $query = 'SELECT * FROM personne WHERE login=:l and pwd like :p';
+
+        $q = $this->db->prepare($query);
+
+        $q->bindValue(':l', $login);
+        $q->bindValue(':p', $pwd);
+        $q->execute();
+
+        $arrAll = $q->fetch(PDO::FETCH_ASSOC);
+
+        $q->closeCursor();
+        $q = NULL;
+
+        return $arrAll;
     }
 }

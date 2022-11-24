@@ -61,7 +61,7 @@ class AdresseDBTest extends Testcase
         try {
             $this->adresse = new AdresseDB($this->pdodb);
             $a = new Adresse(
-                4,
+                5,
                 44,
                 "C'est une nouvelle adresse",
                 44000,
@@ -90,7 +90,7 @@ class AdresseDBTest extends Testcase
         try {
             $this->adresse = new AdresseDB($this->pdodb);
             $a = new Adresse(
-                4,
+                3,
                 44,
                 "C'est une nouvelle adresse",
                 44000,

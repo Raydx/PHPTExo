@@ -10,4 +10,3 @@ include("auth.html");
 include("footer.html");
 }
 }
-?>

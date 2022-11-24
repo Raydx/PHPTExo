@@ -9,14 +9,14 @@ class verifController
     public function __construct()
     {
         session_start();
-        error_reporting(0);
+        error_reporting(E_ALL);
         //recuperation login et pwd du formulaire
         $login = $_POST['log'];
         $pwd = $_POST['pwd'];
-        require_once "pdo/connectionPDO.php";
+        require_once "PDO/connectionPDO.php";
         require_once "Constantes.php";
         require_once "metier/Personne.php";
-        require_once "pdo/PersonneDB.php";
+        require_once "PDO/PersonneDB.php";
         //connexion a la bdd
         $accesPersBDD = new PersonneDB($pdo);
         $result = $accesPersBDD->authentification($login, $pwd);
